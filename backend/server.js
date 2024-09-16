@@ -8,7 +8,7 @@ app.use(cors());
 
 // Enable CORS for the frontend running on http://localhost:5173
 app.use(cors({
-  origin: 'http://localhost:5173,https://quadbassignment.vercel.app/'
+  origin: 'https://quadbassignment.vercel.app/'
 }));
 
 app.get("/", (req,res) => {
