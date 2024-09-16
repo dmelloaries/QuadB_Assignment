@@ -12,7 +12,7 @@ const CryptoTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(' https://quadb-assignment-jqgw.onrender.com/tickers');
+        const response = await fetch('https://quadb-assignment-jqgw.onrender.com/tickers');
         const data = await response.json();
         setCryptoData(data);
       } catch (error) {
@@ -39,9 +39,9 @@ const CryptoTable = () => {
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
       <div className="container mx-auto p-4">
-        <header className="flex justify-between items-center mb-8">
-          <h1 className={`text-3xl font-bold ${isDarkMode ? 'text-teal-500' : 'text-teal-600'}`}>HODLINFO</h1>
-          <div className="flex items-center space-x-4">
+        <header className="flex flex-col sm:flex-row justify-between items-center mb-8">
+          <h1 className={`text-2xl sm:text-3xl font-bold ${isDarkMode ? 'text-teal-500' : 'text-teal-600'}`}>HODLINFO</h1>
+          <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mt-4 sm:mt-0 space-y-4 sm:space-y-0">
             <div className="relative">
               <button 
                 className={`${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-800'} px-4 py-2 rounded flex items-center`}
@@ -92,7 +92,7 @@ const CryptoTable = () => {
             </div>
             <button className="bg-teal-500 text-white px-4 py-2 rounded">BUY {selectedCrypto}</button>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row items-center sm:space-x-4 mt-4 sm:mt-0">
             <button className="bg-teal-500 text-white px-4 py-2 rounded flex items-center">
               <Send className="mr-2" size={18} />
               Connect Telegram
@@ -109,38 +109,40 @@ const CryptoTable = () => {
           </div>
         </header>
         <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} rounded-lg shadow-lg p-6`}>
-          <h2 className={`text-2xl font-semibold mb-4 text-center ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Best Price to Trade</h2>
-          <p className={`text-5xl font-bold text-center ${isDarkMode ? 'text-teal-500' : 'text-teal-600'} mb-6`}>
+          <h2 className={`text-xl sm:text-2xl font-semibold mb-4 text-center ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Best Price to Trade</h2>
+          <p className={`text-3xl sm:text-5xl font-bold text-center ${isDarkMode ? 'text-teal-500' : 'text-teal-600'} mb-6`}>
             {cryptoData.length > 0 ? formatPrice(cryptoData[0].last) : 'Loading...'}
           </p>
-          <table className="w-full">
-            <thead>
-              <tr className={isDarkMode ? 'text-teal-500' : 'text-teal-600'}>
-                <th className="p-2 text-left">Platform</th>
-                <th className="p-2 text-left">Last Traded Price</th>
-                <th className="p-2 text-left">Buy / Sell Price</th>
-                <th className="p-2 text-left">Difference</th>
-                <th className="p-2 text-left">Savings</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cryptoData.map((crypto) => (
-                <tr key={crypto.id} className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-                  <td className="p-2">{crypto.name.split('/')[0]}</td>
-                  <td className="p-2">{formatPrice(crypto.last)}</td>
-                  <td className="p-2">
-                    {formatPrice(crypto.buy)} / {formatPrice(crypto.sell)}
-                  </td>
-                  <td className="p-2">
-                    {((crypto.last - cryptoData[0].last) / cryptoData[0].last * 100).toFixed(2)}%
-                  </td>
-                  <td className="p-2">
-                    {formatPrice(Math.abs(crypto.last - cryptoData[0].last))}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className={isDarkMode ? 'text-teal-500' : 'text-teal-600'}>
+                  <th className="p-2 text-left">Platform</th>
+                  <th className="p-2 text-left">Last Traded Price</th>
+                  <th className="p-2 text-left">Buy / Sell Price</th>
+                  <th className="p-2 text-left">Difference</th>
+                  <th className="p-2 text-left">Savings</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {cryptoData.map((crypto) => (
+                  <tr key={crypto.id} className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
+                    <td className="p-2">{crypto.name.split('/')[0]}</td>
+                    <td className="p-2">{formatPrice(crypto.last)}</td>
+                    <td className="p-2">
+                      {formatPrice(crypto.buy)} / {formatPrice(crypto.sell)}
+                    </td>
+                    <td className="p-2">
+                      {((crypto.last - cryptoData[0].last) / cryptoData[0].last * 100).toFixed(2)}%
+                    </td>
+                    <td className="p-2">
+                      {formatPrice(Math.abs(crypto.last - cryptoData[0].last))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
