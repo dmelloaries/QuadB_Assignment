@@ -7,7 +7,7 @@ const port = 3000;
 
 // Enable CORS for the frontend running on http://localhost:5173
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: 'http://localhost:5173,https://quadbassignment.vercel.app/'
 }));
 
 app.get("/", (req,res) => {
