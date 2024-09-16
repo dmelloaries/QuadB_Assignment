@@ -10,6 +10,10 @@ app.use(cors({
   origin: 'http://localhost:5173'
 }));
 
+app.get("/", (req,res) => {
+    res.send("Server is live");
+  });
+  
 // Route to get all tickers
 app.get('/tickers', async (req, res) => {
   try {
