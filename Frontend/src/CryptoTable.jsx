@@ -12,7 +12,7 @@ const CryptoTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/tickers');
+        const response = await fetch(' https://quadb-assignment-jqgw.onrender.com/tickers');
         const data = await response.json();
         setCryptoData(data);
       } catch (error) {
