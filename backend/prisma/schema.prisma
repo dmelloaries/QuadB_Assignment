@@ -1,0 +1,18 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ticker {
+  id        Int      @id @default(autoincrement())
+  name      String
+  last      Float
+  buy       Float
+  sell      Float
+  volume    Float
+  base_unit String
+}
